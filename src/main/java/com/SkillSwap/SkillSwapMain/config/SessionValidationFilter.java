@@ -8,7 +8,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -31,7 +30,7 @@ public class SessionValidationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         // List of public endpoints to bypass session validation
-        String[] publicEndpoints = {"/api/auth/register", "/api/auth/login"};
+        String[] publicEndpoints = {"/api/auth/register", "/api/auth/login","/api/auth/validate-otp"};
 
         // Check if the current request matches a public endpoint
         String path = request.getRequestURI();
@@ -58,7 +57,7 @@ public class SessionValidationFilter extends OncePerRequestFilter {
         if (token == null || !token.startsWith("Bearer ")) {
             sendErrorResponse(response, BaseResponse.builder()
                     .resultCode(HttpStatus.BAD_REQUEST.value())
-                    .resultMessage("Invalid or missing Authorization header")
+                    .resultMessage("Invalid or missing Token")
                     .build(), HttpStatus.BAD_REQUEST);
             return;
         }

@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF
                 .cors(AbstractHttpConfigurer::disable) // Explicitly disable CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register", "/api/auth/login").permitAll() // Allow public access
+                        .requestMatchers("/api/auth/register", "/api/auth/login","/api/auth/validate-otp").permitAll() // Allow public access
                         .anyRequest().authenticated()// Allow all other requests (no authentication required)
                 )
 //                .exceptionHandling(exception -> exception

@@ -3,6 +3,7 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -73,6 +74,18 @@ public class RestExceptionHandler {
                 HttpStatus.NOT_FOUND.value(),
                 new Date(),
                 "Data base exception : " + ex.getMessage(),
+                request.getDescription(false));
+        return message;
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    public ErrorMessage HttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException ex, WebRequest request) {
+        System.out.println("Handling HttpRequestMethodNotSupportedException for URL: " + request.getDescription(false));
+        ErrorMessage message = new ErrorMessage(
+                HttpStatus.BAD_REQUEST.value(),
+                new Date(),
+                ex.getMessage(),
                 request.getDescription(false));
         return message;
     }

@@ -22,7 +22,7 @@ public class Skill {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SkillType skillType;
+    public SkillType skillType;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -35,10 +35,6 @@ public class Skill {
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();
     }
-}
-
-enum SkillType {
-    OFFER, LEARN
 }
 
 enum ProficiencyLevel {

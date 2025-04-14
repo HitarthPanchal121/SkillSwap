@@ -20,6 +20,9 @@ public class User  {
 
     private String password;// Encrypted Password
 
+    @Column(unique = true, nullable = false)
+    private String mobileNumber;
+
     private String profilePictureUrl;
     private String bio;
     private String location;
