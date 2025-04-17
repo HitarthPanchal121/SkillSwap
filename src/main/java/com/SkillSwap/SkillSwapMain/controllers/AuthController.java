@@ -37,7 +37,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(
                     new BaseResponse<>(
                             400,
-                            "Invalid login request: Provide either email/password or mobileNumber"
+                            "Invalid login request: Provide either email/password or mobile number"
                     )
             );
         }

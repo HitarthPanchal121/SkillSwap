@@ -33,7 +33,3 @@ public class Match {
         this.createdAt = LocalDateTime.now();
     }
 }
-
-enum MatchStatus {
-    PENDING, ACCEPTED, REJECTED
-}
